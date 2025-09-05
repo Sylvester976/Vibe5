@@ -1,2 +1,2 @@
 # Vibe5
-my Simplified Spotify Wrapped
+A Simplified Spotify Wrapped
