@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe5 - Your Custom Spotify Wrapped</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/all.min.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/"><i class="fas fa-music me-2"></i>Vibe5</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="floating-element" style="top: 10%; left: 10%; font-size: 3rem;">
+        <i class="fas fa-music"></i>
+    </div>
+    <div class="floating-element" style="top: 20%; right: 15%; font-size: 2rem;">
+        <i class="fas fa-headphones"></i>
+    </div>
+    <div class="floating-element" style="bottom: 30%; left: 20%; font-size: 2.5rem;">
+        <i class="fas fa-wave-square"></i>
+    </div>
+
+    <div class="container hero-content">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="brand-logo">Vibe5</h1>
+                <h2 class="hero-title">Your Music Story, <br><span style="background: var(--gradient-green); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Reimagined</span></h2>
+                <p class="hero-subtitle">Discover your top 5 tracks, artists, and genres with a custom Spotify Wrapped experience that goes beyond the ordinary. Dive deep into your musical DNA.</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a class="btn btn-spotify btn-lg" href="/login">
+                        <i class="fab fa-spotify me-2"></i>Get Started
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="text-center">
+                    <div class="position-relative d-inline-block">
+                        <div style="width: 300px; height: 300px; background: var(--gradient-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8rem; animation: float 4s ease-in-out infinite;">
+                            <i class="fas fa-music" style="color: var(--spotify-white);"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/main.js"></script>
+</body>
+</html>
