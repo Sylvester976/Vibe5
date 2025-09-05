@@ -2,7 +2,7 @@ let currentStory = 0;
 let isPlaying = true;
 let storyTimer;
 let progressTimer;
-let timeRemaining = 60;
+let timeRemaining = 30;
 
 function populateData() {
     // Populate tracks
