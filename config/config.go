@@ -8,6 +8,7 @@ import (
 )
 
 var (
+	Port         string
 	ClientID     string
 	ClientSecret string
 	RedirectURI  string
@@ -20,6 +21,7 @@ func LoadConfig() {
 		log.Println("No .env file found, using system environment variables")
 	}
 
+	Port = os.Getenv("PORT")
 	ClientID = os.Getenv("SPOTIFY_CLIENT_ID")
 	ClientSecret = os.Getenv("SPOTIFY_CLIENT_SECRET")
 	RedirectURI = os.Getenv("SPOTIFY_REDIRECT_URI")
