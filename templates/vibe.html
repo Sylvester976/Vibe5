@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Vibe5 Stories</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/all.min.css" rel="stylesheet">
+    <link href="/static/css/vibe.css" rel="stylesheet">
+</head>
+<body>
+<div class="stories-container">
+    <!-- Progress Bars -->
+    <div class="progress-container">
+        <div class="progress-bar"><div class="progress-fill" id="progress-0"></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-1"></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-2"></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-3"></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-4"></div></div>
+    </div>
+
+    <!-- Timer -->
+    <div class="timer-circle" id="timer">60</div>
+
+    <!-- Welcome Story -->
+    <div class="story story-welcome active" id="story-0">
+        <div class="story-content">
+            <div class="story-icon">
+                <i class="fas fa-music"></i>
+            </div>
+            <h1 class="story-title">Welcome to Vibe5</h1>
+            <p class="story-subtitle">Your personalized music journey awaits.<br>Let's dive into your unique sound story!</p>
+        </div>
+    </div>
+
+    <!-- Top Tracks Story -->
+    <div class="story story-tracks" id="story-1">
+        <div class="story-content">
+            <h1 class="story-title">Your Top Tracks</h1>
+            <p class="story-subtitle">The songs that defined your vibe</p>
+            <div id="tracks-container"></div>
+        </div>
+    </div>
+
+    <!-- Top Artists Story -->
+    <div class="story story-artists" id="story-2">
+        <div class="story-content">
+            <h1 class="story-title">Your Top Artists</h1>
+            <p class="story-subtitle">The voices that moved you most</p>
+            <div id="artists-container"></div>
+        </div>
+    </div>
+
+    <!-- Top Genres Story -->
+    <div class="story story-genres" id="story-3">
+        <div class="story-content">
+            <h1 class="story-title">Your Musical DNA</h1>
+            <p class="story-subtitle">The genres that shape your sound</p>
+            <div class="genre-cloud" id="genres-container"></div>
+        </div>
+    </div>
+
+    <!-- Goodbye Story -->
+    <div class="story story-goodbye" id="story-4">
+        <div class="story-content">
+            <div class="story-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h1 class="story-title">That's Your Vibe5!</h1>
+            <p class="story-subtitle">Thanks for exploring your musical journey with us.<br>Share your vibe and discover new sounds!</p>
+            <div class="mt-4">
+                <button class="btn btn-lg me-3" style="background: var(--spotify-green); color: var(--spotify-black); font-weight: 700; padding: 1rem 2rem; border-radius: 25px; border: none;">
+                    <i class="fas fa-share-alt me-2"></i>Share Your Vibe5
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button class="control-btn" onclick="previousStory()">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="control-btn" id="playPauseBtn" onclick="togglePlayPause()">
+            <i class="fas fa-pause"></i>
+        </button>
+        <button class="control-btn" onclick="nextStory()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+
+<!-- Pass Go struct as JSON -->
+<script>
+    const vibeData = JSON.parse('{{.}}');
+</script>
+
+
+<!-- External JS -->
+<script src="/static/js/vibe.js"></script>
+</body>
+</html>

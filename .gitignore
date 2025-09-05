@@ -1,0 +1,32 @@
+# Go build files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go modules
+/vendor/
+
+# Binaries
+/bin/
+/build/
+
+# IDE files (GoLand)
+.idea/
+/*.iml
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# Node / frontend if any
+node_modules/
+dist/
