@@ -48,12 +48,12 @@ function populateData() {
 function startStoryTimer() {
     if (!isPlaying) return;
 
-    timeRemaining = 60;
+    timeRemaining = 30;
     updateTimer();
 
     storyTimer = setTimeout(() => {
         nextStory();
-    }, 60000);
+    }, 30000);
 
     const progressFill = document.getElementById(`progress-${currentStory}`);
     if (progressFill) {
