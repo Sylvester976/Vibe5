@@ -1,0 +1,3 @@
+# Compiled binaries from local `go build ./...` (docker build output goes to /out, not here)
+/api
+/worker

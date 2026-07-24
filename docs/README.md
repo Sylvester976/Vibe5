@@ -8,41 +8,49 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the full system design,
 data model, API contract, and UI/UX spec — read that before opening a PR, it's
 the source of truth for how pieces fit together.
 
-**Status:** Phase 1 (backend core) in progress — OAuth/sessions, poller, stats
-API, and widget endpoint. The React dashboard/story frontend, PWA packaging,
-and Capacitor mobile wrapping are Phase 2 and not built yet.
-
 ## Stack
 
-- **Backend:** Go (stdlib `net/http`, Go 1.22+ enhanced `ServeMux` — no router
-  dependency), Postgres
-- **Frontend (Phase 2):** React (Vite), wrapped with Capacitor for iOS/Android
-- **Delivery (Phase 2):** installable PWA + native mobile shell
+- **Backend:** Go (Gin), Postgres
+- **Frontend:** React (Vite), wrapped with Capacitor for iOS/Android
+- **Delivery:** installable PWA + native mobile shell
 
 ## Getting started
 
-Prerequisites: Docker + Docker Compose, a Spotify Developer app (Development
+Prerequisites: Docker + Docker Compose, Node 20+ (for the frontend, which runs
+outside the compose stack for fast reloads), a Spotify Developer app (Development
 Mode is fine — see the note on Spotify API limits below).
 
 ```bash
 # 1. Configure
 cp .env.example .env
-# fill in SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI,
-# SESSION_SECRET, TOKEN_ENCRYPTION_KEY, WIDGET_HMAC_SECRET
+# fill in SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
 
 # 2. Bring up Postgres + the Go API + the worker
 docker compose up --build
+
+# 3. Start the frontend (separate terminal)
+cd apps/web && npm install && npm run dev
 ```
 
-Open `http://localhost:8080/auth/login`, approve on Spotify's consent screen.
+Open `http://localhost:5173`, click **Connect Spotify**.
 
-Migrations run automatically on `docker compose up` (via `api`'s `-migrate`
-flag). Rebuild after Go code changes with `docker compose up --build`.
+Migrations run automatically on `docker compose up`. Rebuild after Go code changes
+with `docker compose up --build`.
+
+### Mobile build
+
+```bash
+cd apps/web
+npm run build
+npx cap sync
+npx cap open ios      # or: npx cap open android
+```
 
 ## Project structure
 
 ```
-apps/api/     Go backend — cmd/api (HTTP server), cmd/worker (poller + rollup)
+apps/api/     Go backend (API server + worker binary)
+apps/web/     React frontend (web, PWA, wrapped for mobile via Capacitor)
 docs/         Architecture and design documentation
 ```
 
@@ -58,3 +66,7 @@ assumes a deprecated endpoint.
 ## Contributing
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+## License
+
+MIT — see `LICENSE`.
