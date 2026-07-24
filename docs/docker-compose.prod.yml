@@ -1,0 +1,21 @@
+# Production profile: adds Caddy in front of the API and the built static
+# frontend. Use alongside the base file:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+services:
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./apps/web/dist:/srv/web:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+
+volumes:
+  caddy_data:
+  caddy_config:
