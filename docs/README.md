@@ -24,6 +24,10 @@ Mode is fine — see the note on Spotify API limits below).
 # 1. Configure
 cp .env.example .env
 # fill in SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
+#
+# Spotify requires the loopback IP literal (127.0.0.1), not the "localhost"
+# hostname, for redirect URIs — register http://127.0.0.1:8080/auth/callback
+# on the app's dashboard settings to match SPOTIFY_REDIRECT_URI exactly.
 
 # 2. Bring up Postgres + the Go API + the worker
 docker compose up --build
@@ -32,7 +36,9 @@ docker compose up --build
 cd apps/web && npm install && npm run dev
 ```
 
-Open `http://localhost:5173`, click **Connect Spotify**.
+Open `http://127.0.0.1:5173` (not `localhost` — the OAuth callback lands on
+`127.0.0.1`, and the login session cookie won't carry over if the two
+hostnames don't match), click **Connect Spotify**.
 
 Migrations run automatically on `docker compose up`. Rebuild after Go code changes
 with `docker compose up --build`.

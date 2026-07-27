@@ -30,10 +30,11 @@ export default defineConfig({
     }),
   ],
   server: {
+    host: '127.0.0.1',
     proxy: {
-      '/api': 'http://localhost:8080',
-      '/auth': 'http://localhost:8080',
-      '/widget': 'http://localhost:8080',
+      '/api': 'http://127.0.0.1:8080',
+      '/auth': 'http://127.0.0.1:8080',
+      '/widget': 'http://127.0.0.1:8080',
     },
   },
 })

@@ -48,7 +48,7 @@ func Load() (*Config, error) {
 		// Where /auth/callback sends the browser after a successful login.
 		// Dev: the Vite dev server (different port, hence not same-origin as
 		// the api). Prod: same-origin, since Caddy serves both from one domain.
-		FrontendURL: getEnvDefault("FRONTEND_URL", "http://localhost:5173"),
+		FrontendURL: getEnvDefault("FRONTEND_URL", "http://127.0.0.1:5173"),
 	}
 
 	for name, val := range map[string]string{

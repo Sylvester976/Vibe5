@@ -31,6 +31,10 @@ Prerequisites: Docker + Docker Compose, Node 20+, a Spotify Developer app
 cp .env.example .env
 # fill in SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI,
 # SESSION_SECRET, TOKEN_ENCRYPTION_KEY, WIDGET_HMAC_SECRET
+#
+# Spotify requires the loopback IP literal (127.0.0.1), not the "localhost"
+# hostname, for redirect URIs — register http://127.0.0.1:8080/auth/callback
+# on the app's dashboard settings to match SPOTIFY_REDIRECT_URI exactly.
 
 # 2. Bring up Postgres + the Go API + the worker
 docker compose up --build
@@ -39,7 +43,9 @@ docker compose up --build
 cd apps/web && npm install && npm run dev
 ```
 
-Open `http://localhost:5173`, click **Connect Spotify**. The Vite dev server
+Open `http://127.0.0.1:5173` (not `localhost` — the OAuth callback lands on
+`127.0.0.1`, and the login session cookie won't carry over if the two
+hostnames don't match), click **Connect Spotify**. The Vite dev server
 proxies `/api`, `/auth`, and `/widget` to the Go API on `:8080` (see
 `apps/web/vite.config.ts`) — this keeps the session cookie same-origin in dev,
 matching how Caddy routes things in production.
