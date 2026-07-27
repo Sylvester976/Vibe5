@@ -1,0 +1,48 @@
+.waveform {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.waveform-bar {
+  flex: 0 0 auto;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--signal-coral);
+  animation: waveform-pulse 1.1s ease-in-out infinite;
+}
+
+.waveform--cyan .waveform-bar {
+  background: var(--signal-cyan);
+}
+
+@keyframes waveform-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* Idle/ambient hero variant: slower, gentler motion. */
+.waveform--hero .waveform-bar {
+  animation-duration: 2.2s;
+}
+
+/* Divider variant: short, flat bars, mostly decorative. */
+.waveform--divider {
+  gap: 3px;
+}
+
+.waveform--divider .waveform-bar {
+  width: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .waveform-bar {
+    animation: none;
+    transform: scaleY(0.7);
+  }
+}

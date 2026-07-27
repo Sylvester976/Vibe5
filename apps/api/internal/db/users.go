@@ -2,10 +2,12 @@ package db
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
@@ -31,6 +33,25 @@ func UpsertUser(ctx context.Context, pool *pgxpool.Pool, spotifyID, displayName 
 		return uuid.Nil, fmt.Errorf("upsert user: %w", err)
 	}
 	return id, nil
+}
+
+var ErrUserNotFound = errors.New("user not found")
+
+// GetUser loads a user by id, used by the /api/me handler to answer "who is
+// this session for" without stashing display_name in the session cookie
+// itself.
+func GetUser(ctx context.Context, pool *pgxpool.Pool, id uuid.UUID) (*User, error) {
+	user := &User{ID: id}
+	err := pool.QueryRow(ctx, `
+		SELECT spotify_id, display_name, created_at FROM users WHERE id = $1
+	`, id).Scan(&user.SpotifyID, &user.DisplayName, &user.CreatedAt)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, ErrUserNotFound
+		}
+		return nil, fmt.Errorf("get user: %w", err)
+	}
+	return user, nil
 }
 
 // ListUserIDs returns every user id, used by the worker to iterate all
