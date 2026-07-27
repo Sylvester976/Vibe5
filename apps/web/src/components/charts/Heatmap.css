@@ -1,0 +1,55 @@
+.heatmap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.heatmap-readout {
+  height: 1.1rem;
+  font-size: 0.8rem;
+  color: var(--ink-100);
+}
+
+.heatmap-readout .value {
+  font-family: var(--font-mono);
+  color: var(--signal-coral);
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: 28px repeat(24, 1fr);
+  gap: 2px;
+}
+
+.heatmap-day-label {
+  font-size: 0.65rem;
+  color: var(--ink-400);
+  display: flex;
+  align-items: center;
+}
+
+.heatmap-cell {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: var(--bg-base);
+  cursor: default;
+}
+
+.heatmap-cell:hover,
+.heatmap-cell:focus-visible {
+  outline: 1px solid var(--signal-coral);
+  outline-offset: 1px;
+}
+
+.heatmap-hours {
+  grid-column: 2 / -1;
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  font-size: 0.6rem;
+  color: var(--ink-400);
+}
+
+.heatmap-hours span {
+  grid-column: span 6;
+  text-align: left;
+}

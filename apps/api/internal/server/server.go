@@ -49,6 +49,7 @@ func (s *Server) routes() {
 	mux.HandleFunc("GET /auth/login", s.handleLogin)
 	mux.HandleFunc("GET /auth/callback", s.handleCallback)
 	mux.Handle("POST /auth/refresh", requireSession(http.HandlerFunc(s.handleRefresh)))
+	mux.Handle("GET /api/me", requireSession(http.HandlerFunc(s.handleMe)))
 
 	mux.Handle("GET /api/stats/top-artists", requireSession(http.HandlerFunc(s.handleTopArtists)))
 	mux.Handle("GET /api/stats/genres", requireSession(http.HandlerFunc(s.handleGenres)))

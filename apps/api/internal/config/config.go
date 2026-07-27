@@ -20,6 +20,7 @@ type Config struct {
 	SpotifyClientSecret string
 	SpotifyRedirectURI  string
 	DatabaseURL         string
+	FrontendURL         string
 
 	SessionSecret      []byte
 	TokenEncryptionKey []byte
@@ -44,6 +45,10 @@ func Load() (*Config, error) {
 		SpotifyClientSecret: os.Getenv("SPOTIFY_CLIENT_SECRET"),
 		SpotifyRedirectURI:  os.Getenv("SPOTIFY_REDIRECT_URI"),
 		DatabaseURL:         os.Getenv("DATABASE_URL"),
+		// Where /auth/callback sends the browser after a successful login.
+		// Dev: the Vite dev server (different port, hence not same-origin as
+		// the api). Prod: same-origin, since Caddy serves both from one domain.
+		FrontendURL: getEnvDefault("FRONTEND_URL", "http://localhost:5173"),
 	}
 
 	for name, val := range map[string]string{

@@ -1,0 +1,26 @@
+# Production profile: adds Caddy in front of the API and the built static
+# frontend. Use alongside the base file:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+#
+# Set FRONTEND_URL in .env to the real same-origin domain (e.g.
+# https://insights.example.com) before deploying — Caddy serves both the API
+# and the built web app from one origin, so /auth/callback should redirect
+# there rather than to the dev-only Vite server address.
+services:
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./apps/web/dist:/srv/web:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+
+volumes:
+  caddy_data:
+  caddy_config:
