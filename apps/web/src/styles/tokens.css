@@ -1,0 +1,22 @@
+/* Design tokens per docs/ARCHITECTURE.md §6 — swap these, not ad hoc values
+   scattered through components, if the palette/type system ever changes. */
+:root {
+  /* Color */
+  --bg-base: #141217;
+  --bg-raised: #1d1a21;
+  --signal-coral: #ff6b4a;
+  --signal-cyan: #5fe3c4;
+  --ink-100: #f2efec;
+  --ink-400: #8b8790;
+
+  --border-subtle: rgb(255 255 255 / 8%);
+
+  /* Type */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Layout */
+  --radius-card: 16px;
+  --radius-control: 999px;
+}

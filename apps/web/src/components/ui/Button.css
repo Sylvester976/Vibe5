@@ -1,0 +1,33 @@
+.btn {
+  appearance: none;
+  border: none;
+  border-radius: var(--radius-control);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.9rem 1.75rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.1s ease, opacity 0.15s ease;
+}
+
+.btn:hover {
+  opacity: 0.92;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--signal-coral);
+  color: var(--bg-base);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--ink-100);
+}

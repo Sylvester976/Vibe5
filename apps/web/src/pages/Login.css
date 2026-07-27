@@ -1,0 +1,80 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1.5rem 3rem;
+  text-align: center;
+}
+
+.login-hero {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  margin-top: 3rem;
+}
+
+.login-brand {
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-400);
+}
+
+.login-tagline {
+  font-size: 1.4rem;
+  color: var(--ink-100);
+  line-height: 1.4;
+}
+
+.login-tagline strong {
+  color: var(--signal-coral);
+}
+
+.proof-row {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 900px;
+  width: 100%;
+}
+
+.proof-card {
+  opacity: 0.85;
+}
+
+.proof-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 60px;
+}
+
+.proof-bar {
+  flex: 1;
+  background: var(--signal-cyan);
+  border-radius: 3px 3px 0 0;
+}
+
+.proof-widget {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--ink-100);
+}
+
+.proof-widget-accent {
+  width: 4px;
+  height: 28px;
+  background: var(--signal-coral);
+  border-radius: 2px;
+}
+
+@media (max-width: 720px) {
+  .proof-row {
+    grid-template-columns: 1fr;
+  }
+}

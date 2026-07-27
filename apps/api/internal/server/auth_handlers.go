@@ -28,9 +28,8 @@ func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
 }
 
 // handleCallback exchanges the authorization code, links/creates the user,
-// stores encrypted tokens, and issues a session cookie. There is no frontend
-// yet, so it responds with a small JSON confirmation instead of redirecting
-// into a React route.
+// stores encrypted tokens, issues a session cookie, and redirects into the
+// frontend's dashboard route.
 func (s *Server) handleCallback(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
@@ -84,10 +83,26 @@ func (s *Server) handleCallback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	writeJSON(w, http.StatusOK, map[string]string{
-		"status":       "connected",
-		"display_name": profile.DisplayName,
-	})
+	http.Redirect(w, r, s.cfg.FrontendURL+"/dashboard", http.StatusSeeOther)
+}
+
+// handleMe answers "who is this session for" — the SPA calls this on load to
+// decide whether to show the login screen or the dashboard/story routes.
+// The session cookie only carries a user id, not a display name, so this
+// does a DB lookup rather than trusting anything client-supplied.
+func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
+	userID, ok := auth.UserIDFromContext(r.Context())
+	if !ok {
+		http.Error(w, "unauthorized", http.StatusUnauthorized)
+		return
+	}
+	user, err := db.GetUser(r.Context(), s.pool, userID)
+	if err != nil {
+		log.Println("get user:", err)
+		http.Error(w, "failed to load user", http.StatusInternalServerError)
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]string{"display_name": user.DisplayName})
 }
 
 // handleRefresh ensures the caller's stored access token is valid, refreshing
